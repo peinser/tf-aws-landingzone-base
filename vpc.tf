@@ -1,32 +1,32 @@
-######################################
-#	Development VPC
-######################################
-
-module "vpc_dev" {
+module "vpc" {
   source = "github.com/peinser/tf-aws-landingzone-module-vpc"
 
-  create_vpc = true
-  env        = "dev"
+  env = var.env
 
-  vpc_name = "vpc-dev"
-  vpc_cidr = "10.0.0.0/16"
-}
+  create_vpc = var.create_vpc
+  vpc_name = var.vpc_name
+  vpc_cidr = var.vpc_cidr
 
-# ------------------------------------------------------------------------------------
+  # VPC flow logs
+  create_vpc_flow_logs               = var.create_vpc_flow_logs
+  vpc_flow_logs_retention_days       = var.vpc_flow_logs_retention_days
+  vpc_flow_logs_aggregation_interval = var.vpc_flow_logs_aggregation_interval
 
+  # Subnets
+  create_database_subnets     = var.create_database_subnets
+  private_subnet_name_prefix  = var.private_subnet_name_prefix
+  public_subnet_name_prefix   = var.public_subnet_name_prefix
+  database_subnet_name_prefix = var.database_subnet_name_prefix
 
-######################################
-#	Production VPC
-######################################
+  private_subnet_cidr_blocks  = var.private_subnet_cidr_blocks
+  public_subnet_cidr_blocks   = var.public_subnet_cidr_blocks
+  database_subnet_cidr_blocks = var.database_subnet_cidr_blocks
 
-module "vpc_prod" {
-  source = "github.com/peinser/tf-aws-landingzone-module-vpc"
+  # NAT gateway
+  create_nat_gateways = var.create_nat_gateways
+  single_nat_gateway  = var.single_nat_gateway
+  nat_gateway_per_az  = var.nat_gateway_per_az
 
-  create_vpc = true
-  env        = "prod"
-
-  vpc_name = "vpc-prod"
-  vpc_cidr = "10.1.0.0/16"
-
-  single_nat_gateway = true
+  # VPC S3 endpoint
+  create_vpc_endpoints = var.create_vpc_endpoints
 }
