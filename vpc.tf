@@ -22,7 +22,7 @@ module "vpc_prod" {
 
   # VPC
   vpc_name = "prod"
-  vpc_cidr = "10.0.1.0/16"
+  vpc_cidr = "10.1.0.0/16"
 
   # VPC flow logs
   vpc_flow_logs_retention_days = 60
