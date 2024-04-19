@@ -171,3 +171,18 @@ variable "create_vpc_endpoints" {
   description = "Whether to create the VPC S3 endpoint configuration. Enabled by default for prod environments"
   default = false
 }
+
+# ------------------------------------------------------------------------------------
+
+
+######################################
+#	Resource tagging
+######################################
+
+variable "tags" {
+  type = map(string)
+  description = "Tags to add to all created resources"
+  default = {
+    "nubex-lz:tf-managed" = "true"
+  }
+}

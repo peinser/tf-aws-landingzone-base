@@ -29,4 +29,7 @@ module "vpc" {
 
   # VPC S3 endpoint
   create_vpc_endpoints = var.create_vpc_endpoints
+
+  # Generic tags applied to all resources
+  tags = merge(var.tags, { "peinser:lz-env" = var.env })
 }
